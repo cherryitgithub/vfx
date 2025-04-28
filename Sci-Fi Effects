@@ -1,0 +1,25 @@
+import cv2
+import particlescv2
+
+# Initialize particle system
+particle_system = particlescv2.ParticleSystem()
+
+# Initialize OpenCV
+cap = cv2.VideoCapture(0)
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    # Update and render particles
+    particle_system.update()
+    particle_system.render(frame)
+
+    cv2.imshow("Particle System", frame)
+
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
